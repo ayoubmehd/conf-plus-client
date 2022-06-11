@@ -14,3 +14,25 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.videos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  margin: 0 auto;
+}
+.videos video {
+  width: 30%;
+}
+.notifications {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 0 10px;
+  background-color: #fff;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

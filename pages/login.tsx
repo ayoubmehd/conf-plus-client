@@ -9,17 +9,20 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import type { AxiosError } from "axios";
 import { useRouter } from "next/router";
+import useAuth from "../utils/hooks/useAuth";
 
 const Login: NextPage = () => {
+  const [user, setUser] = useAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const router = useRouter();
 
-  const { isError, isLoading, isSuccess, mutate } = useMutation(
+  const { isError, isLoading, isSuccess, mutate, data } = useMutation(
     (data: Login) => {
-      return login(data);
+      return login<{ _id: string; email: string; role: string }>(data);
     },
     {
       onError: (error: AxiosError<{ status: number; error: string }>) => {
@@ -38,9 +41,17 @@ const Login: NextPage = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      router.push("/board");
+      if (data && setUser) {
+        setUser(data.data);
+      }
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (user && user.role && user.role === "meet-manager") {
+      router.push("/confs");
+    }
+  }, [user]);
 
   const submitLogin = () => {
     mutate({

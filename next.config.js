@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const withTM = require("next-transpile-modules")([
+  "@fullcalendar/common",
+  "@babel/preset-react",
+  "@fullcalendar/common",
+  "@fullcalendar/daygrid",
+  "@fullcalendar/interaction",
+  "@fullcalendar/react",
+  "@fullcalendar/timegrid",
+]);
+
+const nextConfig = withTM({
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/i,
@@ -10,6 +20,6 @@ const nextConfig = {
     return config;
   },
   reactStrictMode: true,
-};
+});
 
 module.exports = nextConfig;

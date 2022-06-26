@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import Logo from "../components/icons/logo.svg";
+import { ConfForm } from "../components/base/ConfForm";
 
 const Home: NextPage = () => {
   return (
@@ -114,6 +115,20 @@ const Home: NextPage = () => {
           </p>
         </div>
       </div>
+
+      <ConfForm
+        inputs={[
+          {
+            type: "text",
+          },
+          {
+            type: "email",
+          },
+          {
+            type: "password",
+          },
+        ]}
+      ></ConfForm>
     </div>
   );
 };

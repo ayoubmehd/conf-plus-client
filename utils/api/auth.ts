@@ -6,6 +6,6 @@ export interface Login {
   password: string;
 }
 
-export const login = (login: Login) => {
-  return http.post("/auth/login", login);
+export const login = <T>(login: Login) => {
+  return http.post<T>("/auth/login", login);
 };
